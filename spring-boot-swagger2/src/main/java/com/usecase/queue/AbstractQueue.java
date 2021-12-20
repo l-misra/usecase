@@ -11,8 +11,8 @@ public abstract class AbstractQueue {
     public boolean pushToQueue(Message msg) throws InterruptedException {
         System.out.println("=================="+getClassName());
         System.out.println("pushToQueue to queue :"+ getQueueName() );
-        System.out.println("queue details : " + getQueue());
-        System.out.println("message :"+msg);
+        System.out.println("pushToQueue queue details : " + getQueue());
+        System.out.println("pushToQueue message :"+msg);
         System.out.println("==================");
         int retry = 0;
         while (retry < RETRY) {
@@ -31,13 +31,13 @@ public abstract class AbstractQueue {
     public Message pullFromQueu() throws InterruptedException {
         System.out.println("=================="+getClassName());
         System.out.println("pullFromQueu to queue :"+ getQueueName() );
-        System.out.println("queue details : " + getQueue());
+        System.out.println("pullFromQueu queue details : " + getQueue());
         
         int retry = 0;
         Message msg = null;
         while (retry < RETRY) {
             if (getQueue().size() > 0) {
-                System.out.println("message :"+msg);
+                System.out.println("pullFromQueu message :"+msg);
                 msg =  (Message) getQueue().poll();
                 System.out.println("==================");
                 return msg;
@@ -45,7 +45,7 @@ public abstract class AbstractQueue {
             retry++;
             Thread.sleep(1000*10);
         }
-        System.out.println("message :"+msg);
+        System.out.println("pullFromQueu message :"+msg);
         System.out.println("==================");
         return msg;
     }

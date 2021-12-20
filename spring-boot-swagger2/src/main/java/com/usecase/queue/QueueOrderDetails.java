@@ -12,7 +12,7 @@ public class QueueOrderDetails extends AbstractQueue {
     private static final int RETRY = 3;
     private static final String QUEUE_NAME = "QUEUE_ORDER_DETAILS";
 
-    private static Queue<Message> queue = new PriorityQueue();
+    private static Queue<Message> queue = new PriorityQueue(new MessageComparator());
 
     @Override
     public Queue getQueue() {

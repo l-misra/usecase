@@ -31,7 +31,8 @@ public class OrderDetailService {
         try {
             details = orderDetailDao.postOrderById(id);
             System.out.println("order details : " + details);
-            queueOrderDetails.pushToQueue(message = toMessage(details));
+            message = toMessage(details);
+            queueOrderDetails.pushToQueue(message);
             System.out.println("messge details " + message);
             return new SuccessResponse("Order accepted", true, details);
         } catch (Exception e) {
@@ -41,6 +42,7 @@ public class OrderDetailService {
                     ErrorCode.UNKNOWN_ERROR, false);
         }finally {
             try {
+                System.out.println("OrderDetailService pushing to notificationQueue message" + message);
                 notificationQueue.pushToQueue(message);
             } catch (InterruptedException e) {
                 e.printStackTrace();
